@@ -1,31 +1,51 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
-import projectTenebre from "@/assets/project-tenebre.jpg";
-import projectAbastecimento from "@/assets/project-abastecimento.jpg";
-import projectFocaai from "@/assets/project-focaai.jpg";
+// --- IMPORTAÇÃO DAS IMAGENS ---
+
+// Foca.aí
+import focaai1 from "@/assets/project-focaai-1.png";
+import focaai2 from "@/assets/project-focaai-2.png";
+import focaai3 from "@/assets/project-focaai-3.png";
+import focaai4 from "@/assets/project-focaai-4.png";
+
+// Controle de Abastecimento
+import abastecimento1 from "@/assets/project-abastecimento-1.png";
+import abastecimento2 from "@/assets/project-abastecimento-2.png";
+import abastecimento3 from "@/assets/project-abastecimento-3.png";
+import abastecimento4 from "@/assets/project-abastecimento-4.png";
+
+// Tenebre VTT
+import tenebre1 from "@/assets/project-tenebre-1.png";
+import tenebre2 from "@/assets/project-tenebre-2.png";
+import tenebre3 from "@/assets/project-tenebre-3.png";
+import tenebre4 from "@/assets/project-tenebre-4.png";
 
 const projects = [
   {
-    title: "Tenebre VTT",
-    description: "Plataforma de mesa virtual (VTT) com sincronização em tempo real via Supabase Realtime. Arquitetura escalável baseada em features, gerenciamento de estado complexo e integração direta com API do Discord via Edge Functions.",
-    tech: ["React", "TypeScript", "Supabase Realtime", "Edge Functions", "Discord API", "Storage"],
-    image: projectTenebre,
-    number: "01"
+    title: "Foca.aí",
+    description: "SaaS de produtividade com arquitetura Serverless. Backend construído com API Routes (Node.js) conectando ao banco Neon (PostgreSQL) via driver nativo. Implementação de autenticação customizada (JWT) e integração com webhooks da Hotmart.",
+    tech: ["React", "TypeScript", "Neon (PostgreSQL)", "Node.js Serverless", "Raw SQL", "JWT"],
+    images: [focaai1, focaai2, focaai3, focaai4]
   },
   {
     title: "Controle de Abastecimento",
     description: "Sistema ERP para gestão de frota e estoque. Conta com dashboards analíticos (Recharts), geração de relatórios em PDF e regras de negócio complexas implementadas no banco de dados com PL/pgSQL e Triggers.",
     tech: ["React", "TypeScript", "shadcn/ui", "Supabase Auth", "PL/pgSQL", "Recharts"],
-    image: projectAbastecimento,
-    number: "02"
+    images: [abastecimento1, abastecimento2, abastecimento3, abastecimento4]
   },
   {
-    title: "Foca.aí",
-    description: "SaaS de produtividade com arquitetura Serverless. Backend construído com API Routes (Node.js) conectando ao banco Neon (PostgreSQL) via driver nativo. Implementação de autenticação customizada (JWT) e integração com webhooks da Hotmart.",
-    tech: ["React", "TypeScript", "Neon (PostgreSQL)", "Node.js Serverless", "Raw SQL", "JWT"],
-    image: projectFocaai,
-    number: "03"
+    title: "Tenebre VTT",
+    description: "Plataforma de mesa virtual (VTT) com sincronização em tempo real via Supabase Realtime. Arquitetura escalável baseada em features, gerenciamento de estado complexo e integração direta com API do Discord via Edge Functions.",
+    tech: ["React", "TypeScript", "Supabase Realtime", "Edge Functions", "Discord API", "Storage"],
+    images: [tenebre1, tenebre2, tenebre3, tenebre4]
   }
 ];
 
@@ -50,7 +70,7 @@ const Projects = () => {
           </h2>
         </motion.div>
 
-        <div className="space-y-20">
+        <div className="space-y-24">
           {projects.map((project, index) => (
             <motion.article
               key={project.title}
@@ -59,26 +79,37 @@ const Projects = () => {
               transition={{ duration: 0.6, delay: index * 0.15 }}
               className="group"
             >
-              <div className="relative bg-card rounded-3xl border border-border hover:border-muted-foreground/30 transition-all duration-500 overflow-hidden flex flex-col lg:flex-row">
+              <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
                 
-                {/* Project Image Container */}
-                <div className="relative h-64 md:h-80 lg:h-auto lg:w-1/2 overflow-hidden border-b lg:border-b-0 lg:border-r border-border">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent lg:hidden" />
-                  
-                  {/* Project Number */}
-                  <span className="absolute top-6 left-6 lg:top-8 lg:left-8 font-display text-6xl md:text-7xl font-bold text-white/10 lg:text-foreground/5 z-10">
-                    {project.number}
-                  </span>
+                {/* Carousel Container */}
+                <div className="w-full lg:w-3/5 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl relative">
+                  <Carousel className="w-full" opts={{ loop: true }}>
+                    <CarouselContent>
+                      {project.images.map((img, imgIndex) => (
+                        <CarouselItem key={imgIndex}>
+                          <div className="relative aspect-video overflow-hidden cursor-grab active:cursor-grabbing">
+                            <img
+                              src={img}
+                              alt={`${project.title} - Tela ${imgIndex + 1}`}
+                              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                            />
+                            {/* Gradiente sutil para melhorar contraste */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    
+                    {/* Botões de Navegação Customizados */}
+                    <div className="absolute bottom-4 right-4 flex gap-2 z-20">
+                        <CarouselPrevious className="static translate-y-0 translate-x-0 h-10 w-10 bg-background/90 hover:bg-background border-border text-foreground shadow-sm" />
+                        <CarouselNext className="static translate-y-0 translate-x-0 h-10 w-10 bg-background/90 hover:bg-background border-border text-foreground shadow-sm" />
+                    </div>
+                  </Carousel>
                 </div>
 
-                {/* Content Container */}
-                <div className="relative z-10 p-8 md:p-10 lg:p-12 lg:w-1/2 flex flex-col justify-center">
-                  {/* Header */}
+                {/* Conteúdo do Texto */}
+                <div className="w-full lg:w-2/5 flex flex-col justify-center">
                   <div className="mb-6">
                     <h3 className="font-display text-3xl md:text-4xl font-bold mb-4">
                       {project.title}
@@ -86,15 +117,13 @@ const Projects = () => {
                     <div className="h-1 w-20 bg-primary/20 rounded-full" />
                   </div>
 
-                  {/* Description */}
                   <p className="text-muted-foreground leading-relaxed mb-8 text-lg">
                     {project.description}
                   </p>
 
-                  {/* Tech Stack */}
                   <div>
                     <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-                      Tecnologias Utilizadas
+                      Tecnologias
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech) => (
