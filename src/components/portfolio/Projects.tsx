@@ -50,7 +50,7 @@ const Projects = () => {
             Portfólio
           </span>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-            Projetos em produção (com código e demo)
+            Projetos 
           </h2>
         </motion.div>
 
