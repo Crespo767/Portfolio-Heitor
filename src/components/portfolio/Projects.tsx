@@ -1,6 +1,5 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
 
 import projectTenebre from "@/assets/project-tenebre.jpg";
 import projectAbastecimento from "@/assets/project-abastecimento.jpg";
@@ -9,25 +8,22 @@ import projectFocaai from "@/assets/project-focaai.jpg";
 const projects = [
   {
     title: "Tenebre VTT",
-    description: "Plataforma de mesa virtual para RPG com React, Vite e Supabase. Inclui autenticação, banco PostgreSQL, Realtime e integração com Discord via Edge Functions.",
-    tech: ["React", "Vite", "TypeScript", "Supabase", "Realtime", "Discord API"],
-    liveUrl: "https://mark-14.onrender.com/",
+    description: "Plataforma de mesa virtual (VTT) com sincronização em tempo real via Supabase Realtime. Arquitetura escalável baseada em features, gerenciamento de estado complexo e integração direta com API do Discord via Edge Functions.",
+    tech: ["React", "TypeScript", "Supabase Realtime", "Edge Functions", "Discord API", "Storage"],
     image: projectTenebre,
     number: "01"
   },
   {
     title: "Controle de Abastecimento",
-    description: "Sistema de gestão de abastecimento com dashboard, autenticação e CRUD completo. Stack moderna com Vite, TypeScript, shadcn/ui e Supabase.",
-    tech: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui", "Supabase", "PL/pgSQL"],
-    liveUrl: "https://controle-de-abastecimento-1.onrender.com/login",
+    description: "Sistema ERP para gestão de frota e estoque. Conta com dashboards analíticos (Recharts), geração de relatórios em PDF e regras de negócio complexas implementadas no banco de dados com PL/pgSQL e Triggers.",
+    tech: ["React", "TypeScript", "shadcn/ui", "Supabase Auth", "PL/pgSQL", "Recharts"],
     image: projectAbastecimento,
     number: "02"
   },
   {
     title: "Foca.aí",
-    description: "Aplicação web com rotas serverless e APIs integradas. Frontend TypeScript/React com funções backend para processamento de dados.",
-    tech: ["React", "TypeScript", "API Routes", "Serverless", "Vercel"],
-    liveUrl: "https://foca-ai-oficial.vercel.app/",
+    description: "SaaS de produtividade com arquitetura Serverless. Backend construído com API Routes (Node.js) conectando ao banco Neon (PostgreSQL) via driver nativo. Implementação de autenticação customizada (JWT) e integração com webhooks da Hotmart.",
+    tech: ["React", "TypeScript", "Neon (PostgreSQL)", "Node.js Serverless", "Raw SQL", "JWT"],
     image: projectFocaai,
     number: "03"
   }
@@ -50,11 +46,11 @@ const Projects = () => {
             Portfólio
           </span>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-            Projetos 
+            Projetos
           </h2>
         </motion.div>
 
-        <div className="space-y-12">
+        <div className="space-y-20">
           {projects.map((project, index) => (
             <motion.article
               key={project.title}
@@ -63,56 +59,53 @@ const Projects = () => {
               transition={{ duration: 0.6, delay: index * 0.15 }}
               className="group"
             >
-              <div className="relative bg-card rounded-3xl border border-border hover:border-muted-foreground/30 transition-all duration-500 card-interactive overflow-hidden">
-                {/* Project Image */}
-                <div className="relative h-48 md:h-64 lg:h-80 overflow-hidden">
+              <div className="relative bg-card rounded-3xl border border-border hover:border-muted-foreground/30 transition-all duration-500 overflow-hidden flex flex-col lg:flex-row">
+                
+                {/* Project Image Container */}
+                <div className="relative h-64 md:h-80 lg:h-auto lg:w-1/2 overflow-hidden border-b lg:border-b-0 lg:border-r border-border">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent lg:hidden" />
                   
                   {/* Project Number */}
-                  <span className="absolute top-6 right-6 font-display text-5xl md:text-6xl font-bold text-foreground/10 group-hover:text-foreground/20 transition-colors duration-500">
+                  <span className="absolute top-6 left-6 lg:top-8 lg:left-8 font-display text-6xl md:text-7xl font-bold text-white/10 lg:text-foreground/5 z-10">
                     {project.number}
                   </span>
                 </div>
 
-                <div className="relative z-10 p-8 md:p-10 -mt-16 md:-mt-20">
+                {/* Content Container */}
+                <div className="relative z-10 p-8 md:p-10 lg:p-12 lg:w-1/2 flex flex-col justify-center">
                   {/* Header */}
-                  <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
-                    <h3 className="font-display text-2xl md:text-3xl font-bold">
+                  <div className="mb-6">
+                    <h3 className="font-display text-3xl md:text-4xl font-bold mb-4">
                       {project.title}
                     </h3>
-                    
-                    {/* Link */}
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background hover:bg-foreground/90 transition-all duration-300 text-sm font-medium w-fit"
-                    >
-                      Ver projeto
-                      <ArrowUpRight className="w-4 h-4" />
-                    </a>
+                    <div className="h-1 w-20 bg-primary/20 rounded-full" />
                   </div>
 
                   {/* Description */}
-                  <p className="text-muted-foreground leading-relaxed mb-6 max-w-2xl">
+                  <p className="text-muted-foreground leading-relaxed mb-8 text-lg">
                     {project.description}
                   </p>
 
                   {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1.5 text-xs font-medium tracking-wide bg-secondary border border-border rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  <div>
+                    <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+                      Tecnologias Utilizadas
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1.5 text-xs font-medium tracking-wide bg-secondary text-secondary-foreground border border-border rounded-full"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
