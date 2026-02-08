@@ -46,7 +46,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-lg md:text-xl text-muted-foreground max-w-md mx-auto mb-12 leading-relaxed"
           >
-            React • TypeScript • Supabase
+            React • TypeScript • PostgreSQL
           </motion.p>
 
           {/* Social Links */}
@@ -57,7 +57,7 @@ const Hero = () => {
             className="flex items-center justify-center gap-4"
           >
             <a
-              href="https://wa.me/5521999999999"
+              href="https://wa.me/5522998969818"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 rounded-full border border-border bg-secondary hover:bg-foreground hover:text-background transition-all duration-300 group"
@@ -66,7 +66,7 @@ const Hero = () => {
               <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </a>
             <a
-              href="https://linkedin.com/in/heitor-crespo"
+              href="https://www.linkedin.com/in/heitor-crespo-8b6b5a254/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 rounded-full border border-border bg-secondary hover:bg-foreground hover:text-background transition-all duration-300 group"
@@ -75,7 +75,7 @@ const Hero = () => {
               <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
             </a>
             <a
-              href="mailto:heitor@email.com"
+              href="mailto:heitorcrespos@gmail.com"
               className="p-4 rounded-full border border-border bg-secondary hover:bg-foreground hover:text-background transition-all duration-300 group"
               aria-label="Email"
             >

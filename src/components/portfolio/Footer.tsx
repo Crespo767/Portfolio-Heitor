@@ -27,7 +27,7 @@ const Footer = () => {
 
           {/* CTA Button */}
           <motion.a
-            href="https://wa.me/5521999999999"
+            href="https://wa.me/5522998969818"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -48,7 +48,7 @@ const Footer = () => {
             className="flex items-center justify-center gap-4 mb-16"
           >
             <a
-              href="https://wa.me/5521999999999"
+              href="https://wa.me/5522998969818"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 rounded-full border border-border bg-secondary hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300"
@@ -57,7 +57,7 @@ const Footer = () => {
               <Phone className="w-5 h-5" />
             </a>
             <a
-              href="https://linkedin.com/in/heitor-crespo"
+              href="https://www.linkedin.com/in/heitor-crespo-8b6b5a254/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 rounded-full border border-border bg-secondary hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300"
@@ -66,7 +66,7 @@ const Footer = () => {
               <Linkedin className="w-5 h-5" />
             </a>
             <a
-              href="mailto:heitor@email.com"
+              href="mailto:heitorcrespos@gmail.com"
               className="p-4 rounded-full border border-border bg-secondary hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300"
               aria-label="Email"
             >
@@ -77,10 +77,16 @@ const Footer = () => {
           {/* Divider */}
           <div className="divider mb-8" />
 
-          {/* Copyright */}
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Heitor Crespo. Todos os direitos reservados.
-          </p>
+          {/* Copyright - UPDATED: Mais profissional e clean */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 text-sm text-muted-foreground">
+            <p>
+              &copy; {new Date().getFullYear()} Heitor Crespo. Todos os direitos reservados.
+            </p>
+            <span className="hidden md:inline text-muted-foreground/40">•</span>
+            <p className="flex items-center gap-1.5">
+              Desenvolvido com <span className="text-foreground font-medium">React</span>, <span className="text-foreground font-medium">TypeScript</span> & <span className="text-foreground font-medium">PostgreSQL</span>
+            </p>
+          </div>
         </motion.div>
       </div>
     </footer>

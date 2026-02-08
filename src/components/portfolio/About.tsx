@@ -5,15 +5,15 @@ import { useRef } from "react";
 const aboutTexts = [
   {
     title: "Minha Stack",
-    content: "Sou desenvolvedor Full Stack Júnior, com foco em Front-end (React + TypeScript) e experiência construindo aplicações completas com integração de autenticação e banco de dados via Supabase, além de consumo e integração de APIs. Tenho prática com Vite, Tailwind CSS e shadcn/ui, e aplico boas rotinas de organização de código, componentes e formulários."
+    content: "Sou desenvolvedor Full Stack Júnior com foco em Front-end (React + TypeScript). Tenho experiência em projetos web com autenticação, banco de dados PostgreSQL e consumo/integração de APIs, usando Supabase (Auth/Postgres) e Neon (PostgreSQL) conforme o projeto. Trabalho com Vite, Tailwind CSS e shadcn/ui, com atenção a organização de código, componentização e formulários."
   },
   {
     title: "O que posso fazer por você",
-    content: "Eu posso te ajudar a tirar um produto do zero ao ar: criar interfaces responsivas, implementar telas com formulários e validações, autenticação e fluxo de usuários, dashboards e páginas de gestão, integração com banco de dados (CRUD) e serviços externos. Também consigo estruturar o projeto para deploy (ex.: Vercel/Render) e manter uma base de código organizada para evoluir com segurança."
+    content: "Posso te ajudar a tirar um produto do zero do ar: criar interfaces responsivas, implementar formulários com validação, autenticação e fluxo de usuários, construir dashboards e páginas administrativas, integrar banco de dados (CRUD) e integrar APIs. Também consigo preparar o projeto para publicação online (deploy) e manter uma base de código organizada para evoluir com segurança."
   },
   {
     title: "Sobre mim",
-    content: "Meu nome é Heitor Crespo, sou estudante de Análise e Desenvolvimento de Sistemas e venho construindo projetos próprios para evoluir na prática. Já trabalhei com suporte e rotinas de TI em ambientes públicos, lidando com sistemas, usuários e organização de processos. Hoje meu foco é desenvolvimento web, buscando oportunidades para atuar como dev e crescer rápido em projetos reais."
+    content: "Meu nome é Heitor Crespo, sou estudante de Análise e Desenvolvimento de Sistemas (5º período) e venho evoluindo por meio de projetos práticos com código no GitHub e demos online. Tenho experiência profissional em TI/suporte e rotinas digitais, lidando com sistemas, usuários e organização de processos. Hoje busco oportunidades de estágio ou vaga júnior em desenvolvimento web (Front-end ou Full Stack) para crescer em projetos reais."
   }
 ];
 
