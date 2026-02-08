@@ -88,19 +88,22 @@ const Projects = () => {
                       {project.images.map((img, imgIndex) => (
                         <CarouselItem key={imgIndex}>
                           <div className="relative aspect-video overflow-hidden cursor-grab active:cursor-grabbing">
+                            {/* CORREÇÃO:
+                                1. object-top: Garante que o topo da imagem nunca seja cortado.
+                                2. Removido hover:scale: Acaba com o zoom indesejado.
+                                3. Removida a div de gradiente: Acaba com o "embaçado".
+                            */}
                             <img
                               src={img}
                               alt={`${project.title} - Tela ${imgIndex + 1}`}
-                              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                              className="w-full h-full object-cover object-top"
                             />
-                            {/* Gradiente sutil para melhorar contraste */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                           </div>
                         </CarouselItem>
                       ))}
                     </CarouselContent>
                     
-                    {/* Botões de Navegação Customizados */}
+                    {/* Botões de Navegação */}
                     <div className="absolute bottom-4 right-4 flex gap-2 z-20">
                         <CarouselPrevious className="static translate-y-0 translate-x-0 h-10 w-10 bg-background/90 hover:bg-background border-border text-foreground shadow-sm" />
                         <CarouselNext className="static translate-y-0 translate-x-0 h-10 w-10 bg-background/90 hover:bg-background border-border text-foreground shadow-sm" />
