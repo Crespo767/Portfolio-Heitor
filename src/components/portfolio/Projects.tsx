@@ -1,12 +1,19 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Expand, ChevronLeft, ChevronRight } from "lucide-react";
 
 // --- IMPORTAÇÃO DAS IMAGENS ---
 
@@ -28,6 +35,12 @@ import tenebre2 from "@/assets/project-tenebre-2.png";
 import tenebre3 from "@/assets/project-tenebre-3.png";
 import tenebre4 from "@/assets/project-tenebre-4.png";
 
+// Asset Studio
+import assetstudio1 from "@/assets/project-asset-studio-1.png";
+import assetstudio2 from "@/assets/project-asset-studio-2.png";
+import assetstudio3 from "@/assets/project-asset-studio-3.png";
+import assetstudio4 from "@/assets/project-asset-studio-4.png";
+
 const projects = [
   {
     title: "Foca.aí",
@@ -46,12 +59,20 @@ const projects = [
     description: "Plataforma de mesa virtual (VTT) com sincronização em tempo real via Supabase Realtime. Arquitetura escalável baseada em features, gerenciamento de estado complexo e integração direta com API do Discord via Edge Functions.",
     tech: ["React", "TypeScript", "Supabase Realtime", "Edge Functions", "Discord API", "Storage"],
     images: [tenebre1, tenebre2, tenebre3, tenebre4]
+  },
+  {
+    title: "Asset Studio",
+    description: "Aplicação web para edição de imagens com processamento no navegador. Oferece remoção de fundo automática (integração com remove.bg), rotação e flip, recorte livre interativo, redimensionamento com presets (HD, 4K, redes sociais, Foundry VTT) e conversão entre múltiplos formatos.",
+    tech: ["Next.js 16", "TypeScript", "shadcn/ui", "Tailwind CSS", "react-easy-crop", "remove.bg API"],
+    images: [assetstudio1, assetstudio2, assetstudio3, assetstudio4]
   }
 ];
 
 const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [activeImage, setActiveImage] = useState<{ projectIndex: number, imageIndex: number } | null>(null);
+  const carouselApis = useRef<(CarouselApi | undefined)[]>([]);
 
   return (
     <section id="projects" className="bg-background relative" ref={ref}>
@@ -80,33 +101,112 @@ const Projects = () => {
               className="group"
             >
               <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
-                
+
                 {/* Carousel Container */}
                 <div className="w-full lg:w-3/5 overflow-hidden rounded-3xl border border-border bg-card shadow-2xl relative">
-                  <Carousel className="w-full" opts={{ loop: true }}>
+                  <Carousel
+                    className="w-full"
+                    opts={{ loop: true }}
+                    setApi={(api) => {
+                      carouselApis.current[index] = api;
+                    }}
+                  >
                     <CarouselContent>
                       {project.images.map((img, imgIndex) => (
                         <CarouselItem key={imgIndex}>
-                          <div className="relative aspect-video overflow-hidden cursor-grab active:cursor-grabbing">
-                            {/* CORREÇÃO:
-                                1. object-top: Garante que o topo da imagem nunca seja cortado.
-                                2. Removido hover:scale: Acaba com o zoom indesejado.
-                                3. Removida a div de gradiente: Acaba com o "embaçado".
-                            */}
+                          <div className="relative overflow-hidden cursor-grab active:cursor-grabbing bg-muted/30">
                             <img
                               src={img}
                               alt={`${project.title} - Tela ${imgIndex + 1}`}
-                              className="w-full h-full object-cover object-top"
+                              className="w-full h-auto object-contain"
+                              loading="lazy"
                             />
+
+                            {/* Botão de Expandir */}
+                            <Dialog
+                              open={activeImage?.projectIndex === index && activeImage?.imageIndex === imgIndex}
+                              onOpenChange={(open) => {
+                                if (!open && activeImage) {
+                                  // Sincronizar carrossel antes de fechar
+                                  const api = carouselApis.current[activeImage.projectIndex];
+                                  if (api) {
+                                    api.scrollTo(activeImage.imageIndex);
+                                  }
+                                  setActiveImage(null);
+                                }
+                              }}
+                            >
+                              <DialogTrigger asChild>
+                                <button
+                                  className="absolute top-4 right-4 p-2 bg-background/90 hover:bg-background border border-border rounded-lg shadow-lg transition-all duration-200 hover:scale-110 z-10"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setActiveImage({ projectIndex: index, imageIndex: imgIndex });
+                                  }}
+                                  aria-label="Expandir imagem"
+                                >
+                                  <Expand className="w-5 h-5" />
+                                </button>
+                              </DialogTrigger>
+                              <DialogContent className="max-w-7xl w-[95vw] h-[95vh] p-0">
+                                <div className="relative w-full h-full flex items-center justify-center p-8 bg-background/95">
+                                  <img
+                                    src={activeImage?.projectIndex === index ? project.images[activeImage.imageIndex] : img}
+                                    alt={`${project.title} - Tela ${(activeImage?.imageIndex ?? imgIndex) + 1} (Tamanho Completo)`}
+                                    className="max-w-full max-h-full object-contain"
+                                  />
+
+                                  {/* Botões de Navegação */}
+                                  {project.images.length > 1 && (
+                                    <>
+                                      <button
+                                        onClick={() => {
+                                          if (activeImage) {
+                                            const newIndex = activeImage.imageIndex === 0
+                                              ? project.images.length - 1
+                                              : activeImage.imageIndex - 1;
+                                            setActiveImage({ ...activeImage, imageIndex: newIndex });
+                                          }
+                                        }}
+                                        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-background/90 hover:bg-background border border-border rounded-lg shadow-lg transition-all duration-200 hover:scale-110 z-20"
+                                        aria-label="Imagem anterior"
+                                      >
+                                        <ChevronLeft className="w-6 h-6" />
+                                      </button>
+
+                                      <button
+                                        onClick={() => {
+                                          if (activeImage) {
+                                            const newIndex = activeImage.imageIndex === project.images.length - 1
+                                              ? 0
+                                              : activeImage.imageIndex + 1;
+                                            setActiveImage({ ...activeImage, imageIndex: newIndex });
+                                          }
+                                        }}
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-background/90 hover:bg-background border border-border rounded-lg shadow-lg transition-all duration-200 hover:scale-110 z-20"
+                                        aria-label="Próxima imagem"
+                                      >
+                                        <ChevronRight className="w-6 h-6" />
+                                      </button>
+
+                                      {/* Indicador de posição */}
+                                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-background/90 border border-border rounded-lg shadow-lg text-sm font-medium">
+                                        {(activeImage?.imageIndex ?? imgIndex) + 1} / {project.images.length}
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    
+
                     {/* Botões de Navegação */}
                     <div className="absolute bottom-4 right-4 flex gap-2 z-20">
-                        <CarouselPrevious className="static translate-y-0 translate-x-0 h-10 w-10 bg-background/90 hover:bg-background border-border text-foreground shadow-sm" />
-                        <CarouselNext className="static translate-y-0 translate-x-0 h-10 w-10 bg-background/90 hover:bg-background border-border text-foreground shadow-sm" />
+                      <CarouselPrevious className="static translate-y-0 translate-x-0 h-10 w-10 bg-background/90 hover:bg-background border-border text-foreground shadow-sm" />
+                      <CarouselNext className="static translate-y-0 translate-x-0 h-10 w-10 bg-background/90 hover:bg-background border-border text-foreground shadow-sm" />
                     </div>
                   </Carousel>
                 </div>

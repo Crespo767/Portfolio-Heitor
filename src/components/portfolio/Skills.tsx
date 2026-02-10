@@ -4,15 +4,15 @@ import { useRef } from "react";
 const skillCategories = [
   {
     category: "Frontend",
-    skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "shadcn/ui", "Vite", "HTML5", "CSS3"]
+    skills: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "shadcn/ui", "Vite", "HTML5", "CSS3"]
   },
   {
     category: "Backend & Dados",
-    skills: ["PostgreSQL", "SQL", "Supabase", "Neon", "REST APIs", "Edge Functions", "Auth", "CRUD"]
+    skills: ["Node.js", "PostgreSQL", "PL/pgSQL", "SQL", "Supabase", "Neon", "REST APIs", "Edge Functions", "Auth", "JWT", "Webhooks", "Realtime"]
   },
   {
     category: "Ferramentas & Deploy",
-    skills: ["Git", "GitHub", "Vercel", "Render", "VS Code", "Figma"]
+    skills: ["Git", "GitHub", "Vercel", "Render", "VS Code", "Figma", "Recharts"]
   }
 ];
 
@@ -55,9 +55,9 @@ const Skills = () => {
                     key={skill}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ 
-                      duration: 0.4, 
-                      delay: categoryIndex * 0.15 + skillIndex * 0.05 
+                    transition={{
+                      duration: 0.4,
+                      delay: categoryIndex * 0.15 + skillIndex * 0.05
                     }}
                     className="px-4 py-2 text-sm font-medium bg-secondary text-secondary-foreground border border-border rounded-full hover:bg-foreground hover:text-background transition-all duration-300 cursor-default"
                   >

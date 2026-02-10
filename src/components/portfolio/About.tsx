@@ -5,11 +5,11 @@ import { useRef } from "react";
 const aboutTexts = [
   {
     title: "Minha Stack",
-    content: "Sou desenvolvedor Full Stack Júnior com foco em Front-end (React + TypeScript). Tenho experiência em projetos web com autenticação, banco de dados PostgreSQL e consumo/integração de APIs, usando Supabase (Auth/Postgres) e Neon (PostgreSQL) conforme o projeto. Trabalho com Vite, Tailwind CSS e shadcn/ui, com atenção à organização do código, componentização e construção de formulários."
+    content: "Sou desenvolvedor Full Stack Júnior com foco em Front-end (React e Next.js + TypeScript). Tenho experiência sólida em projetos web com autenticação (JWT e OAuth), banco de dados PostgreSQL (incluindo PL/pgSQL para lógica complexa), aplicações em tempo real e integração com APIs externas. Trabalho com Node.js serverless, Supabase (Auth/Realtime/Storage) e Neon (PostgreSQL), além de Vite, Tailwind CSS e shadcn/ui, sempre com atenção à organização do código e componentização."
   },
   {
     title: "O que posso fazer por você",
-    content: "Posso te ajudar a tirar um produto do papel e colocar no ar: criar interfaces responsivas, implementar formulários com validação, autenticação e fluxo de usuários, construir dashboards e páginas administrativas, integrar banco de dados (CRUD) e integrar APIs. Também consigo preparar o projeto para publicação online (deploy) e manter uma base de código organizada para evoluir com segurança."
+    content: "Posso te ajudar a tirar um produto do papel e colocar no ar: criar interfaces responsivas e modernas, implementar formulários com validação, autenticação segura (JWT/OAuth), construir dashboards analíticos e páginas administrativas, desenvolver aplicações em tempo real (chat, notificações), integrar banco de dados (CRUD, procedures, triggers) e APIs externas (pagamento, Discord, AI). Também preparo o projeto para deploy (Vercel, Render) e mantenho código organizado para evoluir com segurança."
   },
   {
     title: "Sobre mim",
